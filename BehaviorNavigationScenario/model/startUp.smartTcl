@@ -28,10 +28,6 @@
   ; Loop - Continuous reading of skills
   (let* ((obj_skill (tcl-kb-query :key '(is-a) :value '((is-a skill)) ) ))
   		(setf name_skill (get-value obj_skill 'name)) ; read the name of the skill to execute
-  		(setf in_1_skill (get-value obj_skill 'in_1)) ; read the parameter IN1 of the skill to execute
-  		(setf in_2_skill (get-value obj_skill 'in_2)) ; read the parameter IN2 of the skill to execute
-  		(setf in_3_skill (get-value obj_skill 'in_3)) ; read the parameter IN3 of the skill to execute
-  		(format t "---> name : ~s (~s, ~s, ~s) ~%" name_skill in_1_skill in_2_skill in_3_skill)
   		(cond
   		((string-equal name_skill "NIL") ;  
   			)
@@ -52,10 +48,10 @@
   			(tcl-kb-update :key '(is-a) :value '((is-a skill_result)(name APPROACHLOCATION)) )  ;TODO: add id_skill
   			)
   		((string-equal name_skill "MOVEROBOTERPOSITION")
-  		    (setf angle (round in_1_skill)) ; TODO: round? is not a good solution for angles
-  		    (setf xpos (round in_2_skill))
-  		    (setf ypos (round in_3_skill))		
-  			(execute `(nav1.tcb-move-robot 'plain ,xpos ,ypos ,angle))
+			(setf xpos (get-value obj_skill 'x)) 
+			(setf ypos (get-value obj_skill 'y)) 
+			(setf radius (get-value obj_skill 'approachRadius))
+  			(execute `(nav1.tcb-move-robot 'plain ,xpos ,ypos ,radius))
  			(tcl-kb-update :key '(is-a) :value '((is-a skill_result)(name MOVEROBOTERPOSITION)) )
   			)
   		((string-equal name_skill "MOVEROBOTERBACKWARDSLOCATION")
