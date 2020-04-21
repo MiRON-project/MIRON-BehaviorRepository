@@ -26,8 +26,8 @@
   ;(format t " ---------------------------------------------------- ~%")
 
   ; Loop - Continuous reading of skills
-  (let* ;((obj_skill (tcl-kb-query :key '(is-a) :value '((is-a skill)) ) ))
-		(obj_skill 'NIL)
+  (let* ((obj_skill (tcl-kb-query :key '(is-a) :value '((is-a skill)) ) ))
+		;(obj_skill 'NIL)
   		(setf name_skill (get-value obj_skill 'name)) ; read the name of the skill to execute
   		(cond
   		((string-equal name_skill "NIL") ;  
