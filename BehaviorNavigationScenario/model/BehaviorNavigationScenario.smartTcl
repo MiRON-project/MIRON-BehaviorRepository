@@ -51,88 +51,22 @@
             (name sofa)
             (speech "sofa")
             (approach-type (region))
-            (approach-region-pose (0 8000 0))
+            (approach-region-pose (4200 2500 0))
             (approach-region-dist 150)
-            (approach-exact-pose (0 8000 0))
+            (approach-exact-pose (4200 2500 0))
             (approach-exact-dist 100)
             (approach-exact-safetycl 0)
-            (orientation-region (position 1000 9000))
-            (orientation-exact (position 1000 9000))
+            (orientation-region (position 4200 2500))
+            (orientation-exact (position 4200 2500))
             (backward-dist 500)))
             
-(tcl-kb-update 
-  :key '(is-a name) 
-  :value '( 
-            (is-a location)
-            (name table)
-            (speech "table")
-            (approach-type (region))
-            ;(approach-region-pose (2500 -2000 0))
-            (approach-region-pose (1500 -1000 0))
-            (approach-region-dist 150)
-            ;(approach-exact-pose (2500 -2000 0))
-            (approach-exact-pose (1500 -1000 0))
-            (approach-exact-dist 100)
-            (approach-exact-safetycl 0)
-            (orientation-region (position 2500 -3000))
-            (orientation-exact (position 2500 -3000))
-            (backward-dist 500)))
-            
-(tcl-kb-update 
-  :key '(is-a name) 
-  :value '( 
-            (is-a location)
-            (name bench)
-            (speech "bench")
-            (approach-type (region))
-            (approach-region-pose (-3000 2200 0))
-            (approach-region-dist 150)
-            (approach-exact-pose (-3000 2200 0))
-            (approach-exact-dist 100)
-            (approach-exact-safetycl 0)
-            (orientation-region (position -4000 2200))
-            (orientation-exact (position -4000 2200))
-            (backward-dist 500)))
-            
-(tcl-kb-update 
-  :key '(is-a name) 
-  :value '( 
-            (is-a location)
-            (name pose1)
-            (speech "pose-one")
-            (approach-type (region))
-            (approach-region-pose (-1000 2000 0))
-            (approach-region-dist 150)
-            (approach-exact-pose (600 1700 0))
-            (approach-exact-dist 100)
-            (approach-exact-safetycl 0)
-            (orientation-region (position 500 2000))
-            (orientation-exact (position 600 1900))
-            (backward-dist 500)))
-
-(tcl-kb-update 
-  :key '(is-a name) 
-  :value '( 
-            (is-a location)
-            (name pose2)
-            (speech "TWO")
-            (approach-region-pose (800 0 0))
-            (approach-region-dist 150)
-            (approach-exact-pose (1000 0 0))
-            (approach-exact-dist 50)
-            (approach-exact-safetycl 0)
-            (orientation-region (position 0 0))
-            (orientation-exact (position 0 0))
-            (backward-dist 500)))
-
-
 (tcl-kb-update 
   :key '(is-a name) 
   :value `(
             (is-a robot)
             (name 1)
-            (velocity-travelling ((0 500)(-60 60)))
-            (velocity-path-navigation ((0 500)(-60 60)))
+            (velocity-travelling ((-1000 1000)(-200 200)))
+            (velocity-path-navigation ((-1000 1000)(-200 200)))
             (velocity-following  ((0 1200)(-200 200)))
             (current-room room-1)
             (current-symbolic-position nil)
@@ -146,8 +80,8 @@
             (is-a room)
             (name room-1)
             (speech "zafh lab")
-            (size (50000 50000))
-            (offset (-25000 -25000))))
+            (size (10000 10000))
+            (offset (-5000 -5000))))
 
 
 
