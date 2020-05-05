@@ -3,7 +3,7 @@ TaskRealizationModel NavTasks {
 	AbstractCoordinationModuleInstance kbModInst coordModuleDef CommBasicObjects.KBModule
 	AbstractCoordinationModuleInstance localizationModInst coordModuleDef CommLocalizationObjects.LocalizationModule
 	AbstractCoordinationModuleInstance base coordModuleDef CommNavigationObjects.MobileBaseModule
-	AbstractCoordinationModuleInstance personRecognition coordModuleDef CommObjectRecognitionObjects.objRecognitionModule
+	AbstractCoordinationModuleInstance detector coordModuleDef CommObjectRecognitionObjects.objRecognitionModule
 	
 	//this task realization is a dummy (see smartTCL file)	
 	TaskRealization CommNavigationObjects.testTask { }
