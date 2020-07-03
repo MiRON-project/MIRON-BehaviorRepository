@@ -21,7 +21,7 @@
 
 (uiop:launch-program "xterm -e $ZMQSERVER_DIR/ZMQServer_broker")
 (uiop:launch-program "xterm -e $ZMQSERVER_DIR/ZMQServer_client")
-(uiop:launch-program "xterm -hold -e $MOOD2BE_DIR/Executor --tree=/home/renan/SOFTWARE/smartsoft/repos/DataRepository/bundles/ModelRepository/ABR/variant_test.xml --skills=/home/renan/SOFTWARE/smartsoft/repos/DataRepository/bundles/ModelRepository/ABR/SystemTiagoNavigation.skills.json")
+(uiop:launch-program "xterm -hold -e $MOOD2BE_DIR/Executor --tree=$SMART_PACKAGE_PATH/DataRepository/bundles/ModelRepository/ABR/variant_test.xml --skills=$SMART_PACKAGE_PATH/DataRepository/bundles/ModelRepository/ABR/SystemTiagoNavigation.skills.json")
 (uiop:launch-program "$GROOT_DIR/Groot")
 
 (defun menu()
