@@ -21,7 +21,7 @@
 
 (uiop:launch-program "xterm -e $ZMQSERVER_DIR/ZMQServer_broker")
 (uiop:launch-program "xterm -e $ZMQSERVER_DIR/ZMQServer_client")
-(uiop:launch-program "xterm -hold -e $MOOD2BE_DIR/Executor --tree=$SMART_PACKAGE_PATH/DataRepository/bundles/ModelRepository/ABR/variant_test.xml --skills=$SMART_PACKAGE_PATH/DataRepository/bundles/ModelRepository/ABR/SystemTiagoNavigation.skills.json")
+(uiop:launch-program "xterm -hold -e $MOOD2BE_DIR/Executor --tree=$SMART_PACKAGE_PATH/DataRepository/bundles/ModelRepository/RetirementHome/main.xml --skills=$SMART_PACKAGE_PATH/DataRepository/bundles/ModelRepository/ABR/SystemTiagoNavigation.skills.json")
 (uiop:launch-program "$GROOT_DIR/Groot")
 
 (defun menu()
@@ -49,9 +49,9 @@
   			(tcl-kb-update :key '(is-a) :value `((is-a skill_result)(name APPROACHLOCATION)(id ,skill_id)) )  ;TODO: add id_skill
   			)
   		((string-equal name_skill "MOVEROBOTERPOSITION")
-			(setf xpos (get-value obj_skill 'x)) 
-			(setf ypos (get-value obj_skill 'y)) ; y is actually z for webots
-			(setf radius (get-value obj_skill 'approachRadius))
+				(setf xpos (get-value obj_skill 'x)) 
+				(setf ypos (get-value obj_skill 'y)) ; y is actually z for webots
+				(setf radius (get-value obj_skill 'approachRadius))
   			(execute `(nav1.tcb-move-robot 'plain ,xpos ,ypos ,radius))
 			;(abort-tcb *CURRENT-INSTANCE*)  
  			(tcl-kb-update :key '(is-a) :value `((is-a skill_result)(name MOVEROBOTERPOSITION)(id ,skill_id)) )
@@ -167,6 +167,21 @@
       ((string-equal name_skill "PEOPLERECOGNITION")
         (execute '(detector.recognize-people))
         (tcl-kb-update :key '(is-a) :value `((is-a skill_result)(name PEOPLERECOGNITION)(id ,skill_id)))
+      )
+			((string-equal name_skill "GETPERSONPOSE")
+				(setf name (get-value obj_skill 'name)) 
+  			(execute `(detector.getPersonPose ,name => '?x '?y '?z)) 
+        (let	(
+            (output_1 (cdr (assoc '?x (tcb-env-vars *CURRENT-INSTANCE*))))
+            (output_2 (cdr (assoc '?y (tcb-env-vars *CURRENT-INSTANCE*))))
+            (output_3 (cdr (assoc '?z (tcb-env-vars *CURRENT-INSTANCE*))))
+            )
+          (tcl-kb-update :key '(is-a) :value `((is-a skill_result)(name GETPERSONPOSE)(id ,skill_id)
+            (OUT_1 ,output_1)
+            (OUT_2 ,output_2)
+            (OUT_3 ,output_3))
+            )	
+        )
       )
 )
   		
