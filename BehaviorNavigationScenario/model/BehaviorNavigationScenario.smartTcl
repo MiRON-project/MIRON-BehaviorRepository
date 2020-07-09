@@ -20,10 +20,7 @@
  (tcl-kb-update 
   :key '(is-a) 
   :value '( 
-            (is-a skill_result)
-            (name NIL)
-            (id -1)
-            (result NIL)))
+            (is-a skill_result)))
  
 ; positions
 ;(tcl-kb-update :key '(is-a) :value '((is-a skill)(name NIL)) )
