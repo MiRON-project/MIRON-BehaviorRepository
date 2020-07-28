@@ -35,7 +35,7 @@
 
 (uiop:launch-program "xterm -e $ZMQSERVER_DIR/ZMQServer_broker")
 (uiop:launch-program "xterm -e $ZMQSERVER_DIR/ZMQServer_client")
-(uiop:launch-program "xterm -hold -e $MOOD2BE_DIR/Executor --tree=$SMART_PACKAGE_PATH/DataRepository/bundles/ModelRepository/RetirementHome/main_with_subtree.xml --skills=$SMART_PACKAGE_PATH/DataRepository/bundles/ModelRepository/ABR/SystemTiagoNavigation.skills.json")
+(uiop:launch-program "xterm -hold -e $MOOD2BE_DIR/Executor --tree=$SMART_PACKAGE_PATH/DataRepository/bundles/ModelRepository/Intralogistics/main_with_subtree.xml --skills=$SMART_PACKAGE_PATH/DataRepository/bundles/ModelRepository/ABR/SystemTiagoNavigation.skills.json")
 (uiop:launch-program "$GROOT_DIR/Groot")
 
 (defun menu()
