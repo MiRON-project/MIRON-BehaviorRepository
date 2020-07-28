@@ -10,12 +10,26 @@
 ; SKILL - name / 3 input parameters maximum / 3 output parameters maximum
 (defvar name_skill NIL)
 (defvar skill_id NIL)
+(defvar old_id NIL)
 (defvar in_1_skill NIL)
 (defvar in_2_skill NIL)
 (defvar in_3_skill NIL)
 (defvar out_1_skill NIL)
 (defvar out_2_skill NIL)
 (defvar out_3_skill NIL)
+(defvar dist 0)
+(defvar angle 0)
+(defvar mapname NIL)
+(defvar x 0)
+(defvar y 0)
+(defvar yaw 0)
+(defvar locations-var NIL)
+(defvar personname NIL)
+(defvar query NIL)
+(defvar radius 0)
+(defvar xpos 0)
+(defvar ypos 0)
+
 ;(defvar id_skill -1) ; TODO: identifying the executed skill using its ID
 ;
 
