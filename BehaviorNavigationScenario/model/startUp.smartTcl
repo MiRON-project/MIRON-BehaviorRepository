@@ -10,18 +10,32 @@
 ; SKILL - name / 3 input parameters maximum / 3 output parameters maximum
 (defvar name_skill NIL)
 (defvar skill_id NIL)
+(defvar old_id NIL)
 (defvar in_1_skill NIL)
 (defvar in_2_skill NIL)
 (defvar in_3_skill NIL)
 (defvar out_1_skill NIL)
 (defvar out_2_skill NIL)
 (defvar out_3_skill NIL)
+(defvar dist 0)
+(defvar angle 0)
+(defvar mapname NIL)
+(defvar x 0)
+(defvar y 0)
+(defvar yaw 0)
+(defvar locations-var NIL)
+(defvar personname NIL)
+(defvar query NIL)
+(defvar radius 0)
+(defvar xpos 0)
+(defvar ypos 0)
+
 ;(defvar id_skill -1) ; TODO: identifying the executed skill using its ID
 ;
 
 (uiop:launch-program "xterm -e $ZMQSERVER_DIR/ZMQServer_broker")
 (uiop:launch-program "xterm -e $ZMQSERVER_DIR/ZMQServer_client")
-(uiop:launch-program "xterm -hold -e $MOOD2BE_DIR/Executor --tree=$SMART_PACKAGE_PATH/DataRepository/bundles/ModelRepository/RetirementHome/main.xml --skills=$SMART_PACKAGE_PATH/DataRepository/bundles/ModelRepository/ABR/SystemTiagoNavigation.skills.json")
+(uiop:launch-program "xterm -hold -e $MOOD2BE_DIR/Executor --tree=$SMART_PACKAGE_PATH/DataRepository/bundles/ModelRepository/Intralogistics/main_with_subtree.xml --skills=$SMART_PACKAGE_PATH/DataRepository/bundles/ModelRepository/ABR/SystemTiagoNavigation.skills.json")
 (uiop:launch-program "$GROOT_DIR/Groot")
 
 (defun menu()
@@ -38,8 +52,10 @@
   		(setf name_skill (get-value obj_skill 'name)) ; read the name of the skill to execute
 			(setf skill_id (get-value obj_skill 'id)) ; read the name of the skill to execute
   		(cond
+				((eq old_id skill_id))
 				((string-equal name_skill "NIL"))
 				((string-equal name_skill "APPROACHLOCATION")
+					(defparameter locations-var NIL)
 					(setf locations-var (get-value obj_skill 'locationId))
 					(cond
 						((equal locations-var 1.0)
@@ -74,17 +90,17 @@
 					(tcl-kb-update :key '(is-a) :value `((is-a skill_result)(name MOVEROBOTERBACKWARDSLOCATION)(id ,skill_id)(RESULT SUCCESS)) )
 					)
 				((string-equal name_skill "MOVEROBOTERBACKWARDSRELATIVE")
-						(setf dist (round in_1_skill))
+					(setf dist (round in_1_skill))
 					(execute `(nav1.tcb-move-robot 'backward-abs ,dist))
 				(tcl-kb-update :key '(is-a) :value `((is-a skill_result)(name MOVEROBOTERBACKWARDSRELATIVE)(id ,skill_id)(RESULT SUCCESS)) )
 					)
 				((string-equal name_skill "MOVEROBOTERORIENTATEROBOTABS")
-						(setf angle (round in_1_skill))		; TODO: round? is not a good solution for angles
+					(setf angle (round in_1_skill))		; TODO: round? is not a good solution for angles
 					(execute `(nav1.tcb-move-robot 'orientate-angle-absolute ,angle))
 					(tcl-kb-update :key '(is-a) :value `((is-a skill_result)(name MOVEROBOTERORIENTATEROBOTABS)(id ,skill_id)(RESULT SUCCESS)) )
 					)  
 				((string-equal name_skill "MOVEROBOTERORIENTATEROBOTREL")
-						(setf angle (round in_1_skill))		; TODO: round? is not a good solution for angles
+					(setf angle (round in_1_skill))		; TODO: round? is not a good solution for angles
 					(execute `(nav1.tcb-move-robot 'orientate-angle-relative ,angle))
 					(tcl-kb-update :key '(is-a) :value `((is-a skill_result)(name MOVEROBOTERORIENTATEROBOTREL)(id ,skill_id)(RESULT SUCCESS)) )
 					)
@@ -131,9 +147,9 @@
 					(tcl-kb-update :key '(is-a) :value `((is-a skill_result)(name LOADMAP)(id ,skill_id)(RESULT SUCCESS)) )
 					)
 				((string-equal name_skill "SETROBOTPOSE")
-						(setf x (round in_1_skill))
-						(setf y (round in_2_skill))
-						(setf yaw (round in_3_skill))	; TODO: round? is not a good solution for angles	
+					(setf x (round in_1_skill))
+					(setf y (round in_2_skill))
+					(setf yaw (round in_3_skill))	; TODO: round? is not a good solution for angles	
 					(execute `(localizationModInst.tcb-set-robot-pose ,x ,y ,yaw))
 				(tcl-kb-update :key '(is-a) :value `((is-a skill_result)(name SETROBOTPOSE)(id ,skill_id)(RESULT SUCCESS)) )
 					)
@@ -187,7 +203,17 @@
 							)	
 					)
 				)
+				((string-equal name_skill "OBJECTPLACEMENT")
+					(setf query (get-value obj_skill 'query)) 
+					(execute `(speech.objectplacement ,query => ?result))
+					(let (
+						(result_ (cdr (assoc '?result (tcb-env-vars *CURRENT-INSTANCE*))))
+						)	
+						(tcl-kb-update :key '(is-a) :value `((is-a skill_result)(name OBJECTPLACEMENT)(id ,skill_id)(RESULT ,result_)))
+					)
+				)
 			)
+			(setf old_id skill_id)
   		
     
 ;  (setf nmbr (parse-integer (read-line nil)))

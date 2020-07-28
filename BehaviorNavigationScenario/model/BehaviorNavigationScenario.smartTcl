@@ -62,8 +62,8 @@
   :value `(
             (is-a robot)
             (name 1)
-            (velocity-travelling ((-1000 1000)(-200 200)))
-            (velocity-path-navigation ((-1000 1000)(-200 200)))
+            (velocity-travelling ((-2000 2000)(-200 200)))
+            (velocity-path-navigation ((-2000 2000)(-200 200)))
             (velocity-following  ((0 1200)(-200 200)))
             (current-room room-1)
             (current-symbolic-position nil)
@@ -79,6 +79,15 @@
             (speech "zafh lab")
             (size (25000 20000))
             (offset (0 -20000))))
+
+(tcl-kb-update 
+  :key '(is-a name) 
+  :value '(
+            (is-a room)
+            (name intralogistics)
+            (speech "intralogistics")
+            (size (20000 16500))
+            (offset (-10000 -3820))))
 
 
 
