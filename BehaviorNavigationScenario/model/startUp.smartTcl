@@ -29,6 +29,7 @@
 (defvar radius 0)
 (defvar xpos 0)
 (defvar ypos 0)
+(defvar obj_index NIL)
 
 ;(defvar id_skill -1) ; TODO: identifying the executed skill using its ID
 ;
@@ -211,6 +212,15 @@
 						)	
 						(tcl-kb-update :key '(is-a) :value `((is-a skill_result)(name OBJECTPLACEMENT)(id ,skill_id)(RESULT ,result_)))
 					)
+				)
+				((string-equal name_skill "OBJECTDROP")
+						(setf obj_index (get-value obj_skill 'obj_index)) 
+						(execute `(speech.objectdrop ,obj_index => ?result))
+						(let (
+							(result_ (cdr (assoc '?result (tcb-env-vars *CURRENT-INSTANCE*))))
+							)	
+							(tcl-kb-update :key '(is-a) :value `((is-a skill_result)(name OBJECTDROP)(id ,skill_id)(RESULT ,result_)))
+						)
 				)
 			)
 			(setf old_id skill_id)
