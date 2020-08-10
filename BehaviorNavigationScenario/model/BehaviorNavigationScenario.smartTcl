@@ -77,8 +77,8 @@
             (is-a room)
             (name room-1)
             (speech "zafh lab")
-            (size (25000 20000))
-            (offset (0 -20000))))
+            (size (40000 40000))
+            (offset (-20000 -20000))))
 
 (tcl-kb-update 
   :key '(is-a name) 

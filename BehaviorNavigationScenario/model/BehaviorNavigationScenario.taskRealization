@@ -5,6 +5,7 @@ TaskRealizationModel NavTasks {
 	AbstractCoordinationModuleInstance base coordModuleDef CommNavigationObjects.MobileBaseModule
 	AbstractCoordinationModuleInstance detector coordModuleDef CommObjectRecognitionObjects.objRecognitionModule
 	AbstractCoordinationModuleInstance speech coordModuleDef DomainSpeech.domainSpeechModule
+	AbstractCoordinationModuleInstance nav2 coordModuleDef CommNavigationObjects.NavigationModule2
 
 	
 	//this task realization is a dummy (see smartTCL file)	
