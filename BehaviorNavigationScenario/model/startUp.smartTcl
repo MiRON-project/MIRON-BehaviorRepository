@@ -225,10 +225,10 @@
 				((string-equal name_skill "PATHPLANNER")
 					(setf xpos (get-value obj_skill 'x)) 
 					(setf ypos (get-value obj_skill 'y)) 
-					(execute `(nav2.pathPlanner ,xpos ,ypos => ?waypoints ?number_of_waypoints)) 
+					(execute `(nav2.pathPlanner ,xpos ,ypos => ?number_of_waypoints ?waypoints)) 
 					(let	(
-							(output_1 (cdr (assoc '?waypoints (tcb-env-vars *CURRENT-INSTANCE*))))
-							(output_2 (cdr (assoc '?number_of_waypoints (tcb-env-vars *CURRENT-INSTANCE*))))
+							(output_1 (cdr (assoc '?number_of_waypoints (tcb-env-vars *CURRENT-INSTANCE*))))
+							(output_2 (cdr (assoc '?waypoints (tcb-env-vars *CURRENT-INSTANCE*))))
 							)
 						(tcl-kb-update :key '(is-a) :value `((is-a skill_result)(name PATHPLANNER)(id ,skill_id)
 							(OUT_1 ,output_1)
